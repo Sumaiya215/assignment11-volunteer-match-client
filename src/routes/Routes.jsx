@@ -10,6 +10,7 @@ import AllPosts from "../pages/AllPosts";
 import AddPost from "../pages/AddPost";
 import MyPosts from "../pages/MyPosts";
 import PrivateRoute from "./PrivateRoute";
+import PostDetails from "../pages/PostDetails";
 
 
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         {
             path:'/posts',
             element:<AllPosts></AllPosts>
+        },
+        {
+          path:'/post/:id',
+          element:<PrivateRoute><PostDetails></PostDetails></PrivateRoute>
         },
         {
             path:'/add-post',
