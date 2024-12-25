@@ -1,0 +1,141 @@
+import { Link } from 'react-router-dom';
+import logo from '../assets/v3-logo.jpg'
+import { useContext, useState } from 'react';
+import { AuthContext } from '../providers/AuthProvider';
+
+const Navbar = () => {
+    const { user , signOutUser } = useContext(AuthContext);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleSignOut = () =>{
+        signOutUser()
+        .then(() =>{
+            console.log('signout successful')
+        })
+        .catch(error => console.log('ERROR',error.message))
+    }
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    }
+
+    return (
+        <div>
+            <div className="navbar bg-base-100 max-w-7xl mx-auto">
+                <div className="flex-1">
+                    <div className='flex gap-1 items-center'>
+                        <img className='w-12' src={logo} alt="" />
+                        <h3 className='font-bold text-xl'>VolunteerMatch</h3>
+                    </div>
+                </div>
+
+                <div className="lg:hidden">
+                    <button className='btn btn-ghost btn-circle'
+                        onClick={toggleMenu}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            className="inline-block h-5 w-5 stroke-current">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div className='hidden lg:flex'>
+                    <ul className=' menu menu-horizontal px-1 '>
+                        <li className='mr-2 text-base font-bold'>
+                            <Link to='/'>Home</Link></li>
+                        <li className='mr-2 text-base font-bold'>
+                            <Link to='/posts'> All Volunteer Need Posts</Link>
+                        </li>
+                        {
+                            !user ? <li className='mb-2'>
+                                <Link to='/login'>
+                                    <button className='btn btn-sm btn-ghost'>Login</button>
+                                </Link>
+
+                            </li> : <>
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar"
+                                        title={user.displayName} >
+
+                                        <div className="w-10 rounded-full">
+                                            <img
+                                                alt="image"
+                                                src={user.photoURL} />
+                                        </div>
+                                    </div>
+                                    <ul
+                                        tabIndex={0}
+                                        className="menu menu-sm dropdown-content bg-base-100 
+                                        rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                        <li>
+                                        <button className='font-bold' onClick={handleSignOut}>Logout</button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <li>
+                                    <details className='dropdown'>
+                                        <summary className='btn btn-ghost'> My Profile </summary>
+                                        <ul className='p-2 shadow bg-base-100 rounded-box'>
+                                            <li className='text-base font-bold'>
+                                                <Link to='/add-post'>Add Volunteer Need Post</Link>
+                                            </li>
+                                            <li className='text-base font-bold'>
+                                                <Link to='/my-posts'>Manage my posts</Link>
+                                            </li>
+                                        </ul>
+                                    </details>
+                                </li>
+                            </>
+                        }
+                    </ul>
+                </div>
+            </div>
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+                <div className='lg:hidden'>
+                    <ul className='menu bg-base-100 p-4 shadow rounded-box'>
+                        <li className='mb-2 text-base font-bold'>
+                            <Link to='/'>Home</Link></li>
+                        <li className='mb-2 text-base font-bold'>
+                            <Link to='/posts'> All Volunteer Need Posts</Link>
+                        </li>
+                        {
+                            !user ? (
+                                <li className='mb-2 text-base font-bold'>
+                                    <Link to='/login'>
+                                        <button className='btn btn-sm btn-primary'>
+                                            Login
+                                        </button>
+                                    </Link>
+
+                                </li>
+                            ) : <>
+                                <li className='mb-2 text-base font-bold'>
+                                    <Link to='/add-post'>Add Volunteer Need Post</Link>
+                                </li>
+                                <li className='mb-2 text-base font-bold'>
+                                    <Link to='/my-posts'>Manage My Posts</Link>
+                                </li>
+                                <li>
+                                    <button onClick={handleSignOut} className='btn btn-sm btn-primary text-base font-bold'>
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
+                        }
+                    </ul>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Navbar;
