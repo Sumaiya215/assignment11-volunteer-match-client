@@ -18,7 +18,7 @@ const AddPost = () => {
         const title = form.title.value;
         const category = form.category.value;
         const location = form.location.value;
-        const number = form.number.value;
+        const number = parseInt(form.number.value);
         const deadline = startDate;
         const description = form.description.value;
         const name = user.displayName;

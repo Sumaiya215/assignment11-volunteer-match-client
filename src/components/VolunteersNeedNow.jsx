@@ -18,7 +18,7 @@ const VolunteersNeedNow = () => {
     console.log(posts);
     return (
         <div className="w-4/5 mx-auto mt-20 mb-12 ">
-            <h3 className="text-3xl text-center font-bold mb-6">Volunteers Need Now: {posts.length}</h3>
+            <h3 className="text-3xl text-center font-bold mb-6">Volunteers Need Now</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {
                     posts.map(post => <PostCard key={post._id}
