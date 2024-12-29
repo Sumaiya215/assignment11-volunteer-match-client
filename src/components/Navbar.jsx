@@ -2,22 +2,31 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/v3-logo.jpg'
 import { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
+import { FaToggleOn } from "react-icons/fa";
+import { FaToggleOff } from "react-icons/fa6";
 
 const Navbar = () => {
-    const { user , signOutUser } = useContext(AuthContext);
+    const { user, signOutUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [theme, setTheme] = useState('light');
 
-    const handleSignOut = () =>{
+    const handleSignOut = () => {
         signOutUser()
-        .then(() =>{
-            console.log('signout successful')
-        })
-        .catch(error => console.log('ERROR',error.message))
+            .then(() => {
+                console.log('signout successful')
+            })
+            .catch(error => console.log('ERROR', error.message))
     }
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     }
+
+    const toggleTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+        document.documentElement.setAttribute("data-theme", newTheme);
+    };
 
     return (
         <div>
@@ -29,9 +38,17 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <div className="lg:hidden">
+                <div className="lg:hidden flex items-center gap-2">
                     <button className='btn btn-ghost btn-circle'
-                        onClick={toggleMenu}>
+                        onClick={toggleTheme}>
+                        {theme === "light" ? (
+                            <FaToggleOn />
+                        ) : (
+                            <FaToggleOff />
+                           
+                        )}
+                        </button>
+                        <button className="btn btn-ghost btn-circle" onClick={toggleMenu}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -46,7 +63,14 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                <div className='hidden lg:flex'>
+                {/* desktop menu */}
+
+                <div className='hidden lg:flex items-center gap-2'>
+                    <button className='btn  btn-ghost mr-3'
+                    onClick={toggleTheme}>
+                        {theme === "light"? <FaToggleOn  /> : <FaToggleOff />}
+                    </button>
+                  
                     <ul className=' menu menu-horizontal px-1 '>
                         <li className='mr-2 text-base font-bold'>
                             <Link to='/'>Home</Link></li>
@@ -75,7 +99,7 @@ const Navbar = () => {
                                         className="menu menu-sm dropdown-content bg-base-100 
                                         rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                         <li>
-                                        <button className='font-bold' onClick={handleSignOut}>Logout</button>
+                                            <button className='font-bold' onClick={handleSignOut}>Logout</button>
                                         </li>
                                     </ul>
                                 </div>

@@ -14,11 +14,7 @@ const AllPosts = () => {
         fetchAllPosts();
     }, [search])
 
-    // const fetchAllPosts = async () => {
-    //     const { data } = await axios.get(`http://localhost:3000/posts`)
-    //     setPosts(data)
-     //}
-
+    
     console.log(posts);
 
     return (

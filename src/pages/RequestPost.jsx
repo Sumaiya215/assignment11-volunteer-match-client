@@ -21,7 +21,6 @@ const RequestPost = () => {
     const fetchPostData = async () => {
         const { data } = await axios.get(`http://localhost:3000/add-request/${id}`)
         setPost(data)
-        // setStartDate(new Date(data.deadline))
     }
 
     console.log(post);

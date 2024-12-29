@@ -1,49 +1,48 @@
-import axios from "axios";
-import toast from "react-hot-toast";
+
+// import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const PostsTable = ({ post, index , posts, setPosts}) => {
     const { _id, title, category, number } = post || '';
-
-    const handleDelete = async id => {
-        try {
-            await axios.delete(`http://localhost:3000/post/${id}`)
-           toast.success('Post Deleted Successfully')
-
-            //updating state
-           const  newPosts = posts.filter(post => post._id !== _id)
-            setPosts(newPosts);
-
-        } catch (error) {
-            console.log(error)
-            toast.error(error.message)
+    
+        const handleDelete = id => {
+           
+            Swal.fire({
+                title: "Are you sure?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+    
+                    fetch(`http://localhost:3000/post/${id}`, {
+                        method: 'DELETE'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            if (data.deletedCount) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your post has been deleted.",
+                                    icon: "success"
+                              });
+    
+                                // updating state
+                                const newPosts = posts.filter(post => post._id !== _id);
+                                setPosts(newPosts);
+    
+                            }
+                        })
+    
+                }
+            });
         }
-
-    }
-
-    const confirmDelete = id =>{
-        toast(t =>(
-            <div className="flex items-center gap-2">
-                
-                    <p>Are you sure?</p>
-                
-                <div>
-                    <button className="btn bg-red-500 text-white px-3 py-1 rounded-md"
-                    onClick={() =>{
-                        toast.dismiss(t.id) 
-                        handleDelete(id)
-                    }}>
-                        Yes
-                    </button>
-                    <button className="btn bg-green-500 text-white px-3 py-1 rounded-md"
-                    onClick={() => toast.dismiss(t.id)}>
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        ))
-    }
+    
 
     return (
         <div className="w-11/12 mx-auto mt-6 mb-12">
@@ -74,7 +73,7 @@ const PostsTable = ({ post, index , posts, setPosts}) => {
                                         </button>
                                     </Link>
 
-                                    <button onClick={() => confirmDelete(_id)} className="btn btn-sm btn-primary">
+                                    <button onClick={() => handleDelete(_id)} className="btn btn-sm btn-primary">
                                         Delete
                                     </button>
                                 </div>
