@@ -5,6 +5,7 @@ import axios from "axios";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 
 const UpdatePost = () => {
@@ -63,6 +64,9 @@ const UpdatePost = () => {
 
     return (
         <div className='w-1/2 mx-auto mt-12 '>
+            <Helmet>
+                <title>Update Post | Volunteer Match</title>
+            </Helmet>
             <div className='card bg-base-100 w-full  shrink-0 shadow-2xl mb-20 pb-26'>
                 <h2 className='text-3xl text-center mt-4 font-bold'>Update A Post</h2>
                 <form onSubmit={handleSubmit} className='card-body'>

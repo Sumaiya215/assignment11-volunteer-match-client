@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const RequestPost = () => {
     const navigate = useNavigate();
@@ -54,6 +55,9 @@ const RequestPost = () => {
 
     return (
         <div className='w-3/4 mx-auto mt-12 lg:w-1/2'>
+            <Helmet>
+                <title>Be a Volunteer | Volunteer Match</title>
+            </Helmet>
             <div className='card bg-base-100 w-full  shrink-0 shadow-2xl mb-20 pb-26'>
                 <h2 className='text-3xl text-center mt-6 font-bold'>Be a Volunteer Post</h2>
                 <form  onSubmit={handleRequest} className='card-body'>

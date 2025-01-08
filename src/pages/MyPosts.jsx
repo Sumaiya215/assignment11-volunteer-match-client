@@ -3,11 +3,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import PostsTable from '../components/PostsTable';
 import RequestsTable from '../components/RequestsTable';
+import { Helmet } from 'react-helmet-async';
 
 const MyPosts = () => {
     const [posts, setPosts] = useState([]);
     const [requests, setRequests] = useState([]);
-    const {user} = useContext(AuthContext);
+    const {user, loading} = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAllPosts = async () => {
@@ -31,8 +32,15 @@ const MyPosts = () => {
 
     console.log(requests);
 
+    if(loading) return 
+    <progress className="progress progress-success w-56 " value="40" max="100">
+    </progress>
+
     return (
         <div className='w-11/12 mx-auto mt-12 mb-22'>
+            <Helmet>
+                <title>Manage My Posts | Volunteer Match </title>
+            </Helmet>
             <div className='flex justify-between flex-col lg:flex-row items-center'>
             <section className='mb-12'>
                 <h3 className='text-2xl font-bold text-center mb-6'>

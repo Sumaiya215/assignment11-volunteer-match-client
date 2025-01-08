@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import loginLottieData from '../assets/Lottie/login.json'
 import Lottie from "lottie-react";
 import { AuthContext } from "../providers/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -43,6 +44,9 @@ const Login = () => {
 
     return (
         <div className="hero bg-base-100 min-h-screen mx">
+            <Helmet>
+                <title>Login | Volunteer Match</title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left w-[640px]">
                     <Lottie animationData={loginLottieData}></Lottie>

@@ -5,6 +5,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const AddPost = () => {
     const navigate = useNavigate();
@@ -44,6 +45,9 @@ const AddPost = () => {
 
     return (
         <div className='w-1/2 mx-auto mt-12 '>
+            <Helmet>
+                <title>Add Volunteer Need Post | Volunteer Match</title>
+            </Helmet>
             <div className='card bg-base-100 w-full  shrink-0 shadow-2xl mb-20 pb-26'>
                 <h2 className='text-3xl text-center mt-4 font-bold'>Add Posts</h2>
                 <form onSubmit={handleSubmit} className='card-body'>

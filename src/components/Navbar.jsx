@@ -42,9 +42,9 @@ const Navbar = () => {
                     <button className='btn btn-ghost btn-circle'
                         onClick={toggleTheme}>
                         {theme === "light" ? (
-                            <FaToggleOn />
+                            <FaToggleOn className='text-2xl' />
                         ) : (
-                            <FaToggleOff />
+                            <FaToggleOff className='text-2xl' />
                            
                         )}
                         </button>
@@ -68,7 +68,9 @@ const Navbar = () => {
                 <div className='hidden lg:flex items-center gap-2'>
                     <button className='btn  btn-ghost mr-3'
                     onClick={toggleTheme}>
-                        {theme === "light"? <FaToggleOn  /> : <FaToggleOff />}
+                        {theme === "light"? 
+                        <FaToggleOn className='text-2xl' /> : 
+                        <FaToggleOff className='text-2xl' />}
                     </button>
                   
                     <ul className=' menu menu-horizontal px-1 '>

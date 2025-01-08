@@ -1,12 +1,15 @@
 import axios from "axios";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const PostDetails = () => {
     const [post, setPost] = useState({});
     const { id } = useParams();
+    const {loading} = useContext(AuthContext);
     const [startDate, setStartDate] = useState(new Date());
 
     useEffect(() => {
@@ -19,11 +22,19 @@ const PostDetails = () => {
         // setStartDate(new Date(data.deadline))
     }
     console.log(post);
+
+    if(loading) return 
+    <progress className="progress progress-success w-56 " value="40" max="100">
+    </progress>
+
     const { _id, photo, title, category, location, number,
         deadline, description, name, email } = post
 
     return (
         <div className="w-3/4 mx-auto mt-12 mb-20">
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
             <div className="card flew-col lg:card-side bg-base-100 shadow-xl">
                 <figure>
                     <img

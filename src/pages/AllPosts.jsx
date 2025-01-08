@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
+import { AuthContext } from '../providers/AuthProvider';
 
 const AllPosts = () => {
     const [posts, setPosts] = useState([]);
     const [search, setSearch] = useState('');
+    const {loading} = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAllPosts = async () => {
@@ -17,8 +20,15 @@ const AllPosts = () => {
     
     console.log(posts);
 
+    if(loading) return 
+    <progress className="progress progress-success w-56 " value="40" max="100">
+    </progress>
+
     return (
         <div className='w-4/5 mx-auto mt-12 mb-24'>
+            <Helmet>
+                <title>All Volunteer Need Posts | Volunteer Match</title>
+            </Helmet>
             <div className='flex justify-between items-center'>
                 <h2 className='text-3xl font-bold  mb-12'>All Volunteer Need Posts</h2>
                 <label className="input input-bordered flex items-center gap-2 mb-6">

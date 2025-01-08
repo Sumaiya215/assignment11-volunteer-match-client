@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import PostCard from "./PostCard";
 import 'react-tabs/style/react-tabs.css';
+import { AuthContext } from "../providers/AuthProvider";
 
 const TopCategories = () => {
     const [posts, setPosts] = useState([]);
-    
+   const {loading} = useContext(AuthContext);
+
     useEffect(() => {
         fetchAllPosts();
     }, [])
@@ -17,6 +19,11 @@ const TopCategories = () => {
     }
 
     console.log(posts);
+
+    if(loading) return 
+    <progress className="progress progress-success w-56 " value="40" max="100">
+    </progress>
+
     return (
         <Tabs>
             <div className="w-4/5 mx-auto mt-12 mb-16  ">
