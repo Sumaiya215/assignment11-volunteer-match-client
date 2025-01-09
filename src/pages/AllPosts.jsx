@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
-import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import { AuthContext } from '../providers/AuthProvider';
+import useAxiosPublic from '../hooks/useAxiosPublic';
 
 const AllPosts = () => {
+    const axiosPublic = useAxiosPublic();
     const [posts, setPosts] = useState([]);
     const [search, setSearch] = useState('');
     const {loading} = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAllPosts = async () => {
-            const { data } = await axios.get(`http://localhost:3000/posts?search=${search}`)
+            const { data } = await axiosPublic.get(`/posts?search=${search}`)
             setPosts(data)
         }
         fetchAllPosts();

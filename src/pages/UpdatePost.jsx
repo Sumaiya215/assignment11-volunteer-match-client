@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import axios from "axios";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const UpdatePost = () => {
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
     const [post, setPost] = useState({});
     const { id } = useParams();
     const [startDate, setStartDate] = useState(new Date());
@@ -20,7 +21,7 @@ const UpdatePost = () => {
     }, [])
 
     const fetchPostData = async () => {
-        const { data } = await axios.get(`http://localhost:3000/post/${id}`)
+        const { data } = await axiosSecure.get(`/post/${id}`)
         setPost(data)
         setStartDate(new Date(data.deadline))
     }
@@ -49,7 +50,7 @@ const UpdatePost = () => {
         };
 
         try {
-            await axios.put(`http://localhost:3000/update-post/${id}`, updatePost)
+            await axiosSecure.put(`/update-post/${id}`, updatePost)
             form.reset()
             toast.success('post updated successfully')
             navigate('/my-posts')

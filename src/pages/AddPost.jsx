@@ -6,10 +6,13 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+
 
 const AddPost = () => {
     const navigate = useNavigate();
     const {user} = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
     const [startDate, setStartDate] = useState(new Date());
 
     const handleSubmit = async e =>{
@@ -32,7 +35,7 @@ const AddPost = () => {
             deadline, description, name, email};
 
          try{
-            await axios.post(`http://localhost:3000/add-post`, newPost)
+            await axiosSecure.post(`/add-post`, newPost)
             toast.success('post added successfully')
             navigate('/my-posts')
          } catch(error){

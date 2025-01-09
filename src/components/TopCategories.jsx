@@ -1,12 +1,14 @@
-import axios from "axios";
+
 import { useContext, useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import PostCard from "./PostCard";
 import 'react-tabs/style/react-tabs.css';
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const TopCategories = () => {
-    const [posts, setPosts] = useState([]);
+   const axiosPublic = useAxiosPublic();
+   const [posts, setPosts] = useState([]);
    const {loading} = useContext(AuthContext);
 
     useEffect(() => {
@@ -14,7 +16,7 @@ const TopCategories = () => {
     }, [])
 
     const fetchAllPosts = async () => {
-        const { data } = await axios.get(`http://localhost:3000/posts`)
+        const { data } = await axiosPublic.get('/posts')
         setPosts(data)
     }
 

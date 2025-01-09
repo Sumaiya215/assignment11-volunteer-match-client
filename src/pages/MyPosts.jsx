@@ -1,18 +1,20 @@
-import axios from 'axios';
+
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import PostsTable from '../components/PostsTable';
 import RequestsTable from '../components/RequestsTable';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyPosts = () => {
+    const axiosSecure = useAxiosSecure();
     const [posts, setPosts] = useState([]);
     const [requests, setRequests] = useState([]);
     const {user, loading} = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAllPosts = async () => {
-            const { data } = await axios.get(`http://localhost:3000/posts/${user?.email}`)
+            const { data } = await axiosSecure.get(`/posts/${user?.email}`)
             setPosts(data)
         }
         fetchAllPosts();
@@ -24,7 +26,7 @@ const MyPosts = () => {
     //optional test
     useEffect(() => {
         const fetchAllRequests = async () => {
-            const { data } = await axios.get(`http://localhost:3000/add-requests/${user?.email}`)
+            const { data } = await axiosSecure.get(`/add-requests/${user?.email}`)
             setRequests(data)
         }
         fetchAllRequests();

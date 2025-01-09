@@ -4,6 +4,7 @@ import loginLottieData from '../assets/Lottie/login.json'
 import Lottie from "lottie-react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Login = () => {
         signInUser(email,password)
         .then(result => {
             console.log(result.user);
+            toast.success('Login Successful')
             e.target.reset();
             navigate('/');
         })

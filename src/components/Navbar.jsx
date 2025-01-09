@@ -4,16 +4,18 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { FaToggleOn } from "react-icons/fa";
 import { FaToggleOff } from "react-icons/fa6";
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useState('light');   
 
     const handleSignOut = () => {
         signOutUser()
             .then(() => {
                 console.log('signout successful')
+                toast.success('Logout successful')
             })
             .catch(error => console.log('ERROR', error.message))
     }
@@ -39,7 +41,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="lg:hidden flex items-center gap-2">
-                    <button className='btn btn-ghost btn-circle'
+                    <button className='btn btn-sm btn-ghost btn-circle'
                         onClick={toggleTheme}>
                         {theme === "light" ? (
                             <FaToggleOn className='text-2xl' />
@@ -66,7 +68,7 @@ const Navbar = () => {
                 {/* desktop menu */}
 
                 <div className='hidden lg:flex items-center gap-2'>
-                    <button className='btn  btn-ghost mr-3'
+                    <button className='btn btn-sm btn-ghost mr-3'
                     onClick={toggleTheme}>
                         {theme === "light"? 
                         <FaToggleOn className='text-2xl' /> : 
@@ -82,7 +84,7 @@ const Navbar = () => {
                         {
                             !user ? <li className='mb-2'>
                                 <Link to='/login'>
-                                    <button className='btn btn-sm btn-ghost'>Login</button>
+                                    <button className='btn btn-sm font-bold '>Login</button>
                                 </Link>
 
                             </li> : <>
@@ -137,7 +139,7 @@ const Navbar = () => {
                             !user ? (
                                 <li className='mb-2 text-base font-bold'>
                                     <Link to='/login'>
-                                        <button className='btn btn-sm btn-primary'>
+                                        <button className='btn btn-sm '>
                                             Login
                                         </button>
                                     </Link>

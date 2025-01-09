@@ -4,15 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import registerLottieData from '../assets/Lottie/register.json'
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 
 const Register = () => {
     const navigate = useNavigate();
-    const { createUser, updateUser, setUser, signInWithGoogle } = useContext(AuthContext);
+    const { createUser, updateUser, setUser, signInWithGoogle} = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleRegister = async e => {
+      
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -22,6 +22,7 @@ const Register = () => {
         console.log(name, photo, email, password);
 
         setErrorMessage('');
+        // loading(true);
 
         const regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
         if (!regex.test(password)) {
@@ -29,10 +30,10 @@ const Register = () => {
             return;
         }
 
+       
         try {
             const result = await createUser(email, password)
-            console.log(result);
-
+            
             await updateUser(name, photo)
             setUser({
                 ...result.user,
@@ -40,20 +41,14 @@ const Register = () => {
                 photoURL: photo,
             })
 
-            toast.success('user added successfully');
-            // Swal.fire({
-            //     title: 'Success!',
-            //     text: 'User added successfully',
-            //     icon: 'success',
-            //     confirmButtonText: 'Ok'
-            // });
-            // e.target.reset();
+            toast.success('User registration successful');
             navigate('/');
 
         } catch (error) {
-            console.log('User registration error')
+            console.log(error)
             toast.error('User registration unsuccessful')
-        }
+
+        } 
     };
 
     const handleGoogleSignIn = () => {
@@ -64,6 +59,7 @@ const Register = () => {
             })
             .catch(error => console.log('ERROR', error.message));
     }
+ 
 
     return (
         <div className="hero bg-base-100 min-h-screen mb-12">

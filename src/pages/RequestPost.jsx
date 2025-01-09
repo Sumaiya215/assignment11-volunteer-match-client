@@ -6,11 +6,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const RequestPost = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
     const [post, setPost] = useState({});
     const [status, setStatus] = useState('requested')
     const [startDate, setStartDate] = useState(new Date());
@@ -20,7 +22,7 @@ const RequestPost = () => {
     }, [id])
 
     const fetchPostData = async () => {
-        const { data } = await axios.get(`http://localhost:3000/add-request/${id}`)
+        const { data } = await axiosSecure .get(`/add-request/${id}`)
         setPost(data)
     }
 
@@ -43,7 +45,7 @@ const RequestPost = () => {
             }
 
             try{
-                const {data} = await axios.post(`http://localhost:3000/add-request`, volunteerData)
+                const {data} = await axiosSecure.post(`/add-request`, volunteerData)
                 console.log(data)
                 toast.success('request added successfully');
                 navigate('/my-posts')

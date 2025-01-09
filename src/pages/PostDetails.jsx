@@ -1,14 +1,16 @@
-import axios from "axios";
+
 import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const PostDetails = () => {
     const [post, setPost] = useState({});
     const { id } = useParams();
+    const axiosSecure = useAxiosSecure();
     const {loading} = useContext(AuthContext);
     const [startDate, setStartDate] = useState(new Date());
 
@@ -17,7 +19,7 @@ const PostDetails = () => {
     }, [id])
 
     const fetchPostData = async () => {
-        const { data } = await axios.get(`http://localhost:3000/post/${id}`)
+        const { data } = await axiosSecure.get(`/post/${id}`)
         setPost(data)
         // setStartDate(new Date(data.deadline))
     }

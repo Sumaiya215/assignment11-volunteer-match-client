@@ -1,10 +1,12 @@
-import axios from "axios";
+
 import { useContext, useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const VolunteersNeedNow = () => {
+    const axiosPublic = useAxiosPublic();
     const [posts, setPosts] = useState([]);
     const {loading} = useContext(AuthContext);
 
@@ -13,7 +15,7 @@ const VolunteersNeedNow = () => {
     }, [])
 
     const fetchAllPosts = async () => {
-        const { data } = await axios.get(`http://localhost:3000/few-posts`)
+        const { data } = await axiosPublic.get('/few-posts')
         setPosts(data)
     }
     console.log(posts);
