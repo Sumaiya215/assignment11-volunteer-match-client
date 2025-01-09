@@ -2,10 +2,12 @@
 // import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const PostsTable = ({ post, index , posts, setPosts}) => {
     const { _id, title, category, number } = post || '';
+        const axiosSecure = useAxiosSecure();
     
         const handleDelete = id => {
            
@@ -16,19 +18,14 @@ const PostsTable = ({ post, index , posts, setPosts}) => {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
+                    const res = await axiosSecure.delete(`/post/${id}`)
     
-                    fetch(`http://localhost:3000/post/${id}`, {
-                        method: 'DELETE'
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log(data);
-                            if (data.deletedCount) {
+                            if (res.data.deletedCount) {
                                 Swal.fire({
                                     title: "Deleted!",
-                                    text: "Your post has been deleted.",
+                                    text: `${title} has been deleted.`,
                                     icon: "success"
                               });
     
@@ -37,10 +34,10 @@ const PostsTable = ({ post, index , posts, setPosts}) => {
                                 setPosts(newPosts);
     
                             }
-                        })
-    
-                }
-            });
+                        }
+            
+                })
+           
         }
     
 

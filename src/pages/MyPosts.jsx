@@ -23,7 +23,7 @@ const MyPosts = () => {
     console.log(posts);
 
     // for post requests
-    //optional test
+    
     useEffect(() => {
         const fetchAllRequests = async () => {
             const { data } = await axiosSecure.get(`/add-requests/${user?.email}`)
@@ -43,25 +43,29 @@ const MyPosts = () => {
             <Helmet>
                 <title>Manage My Posts | Volunteer Match </title>
             </Helmet>
-            <div className='flex justify-between flex-col lg:flex-row items-center'>
+            <div className='flex justify-around flex-col lg:flex-row items-center'>
             <section className='mb-12'>
-                <h3 className='text-2xl font-bold text-center mb-6'>
-                    My Volunteer Need Posts:{posts.length}</h3>
+                <h3 className='text-xl font-bold text-center mb-6'>
+                    My Volunteer Need Posts </h3>
                     {
+                       posts.length?(
                         posts.map((post,index) =><PostsTable key={post._id}
                        index={index} post={post} posts={posts} setPosts = {setPosts}>
-                        </PostsTable>)
+                        </PostsTable>)) : (<p className='text-red-500 font-semibold'>
+                        Posts are not Added</p> )
                     }
 
             </section>
             <section className='mb-12'>
-                <h3 className='text-2xl font-bold text-center mb-6'>
-                    My Volunteer Request Posts: {requests.length}</h3>
+                <h3 className='text-xl font-bold text-center mb-6'>
+                    My Volunteer Request Posts </h3>
                     {
+                        requests.length?(
                         requests.map((request,index) =><RequestsTable key={request._id}
                         index={index} request={request} requests={requests} setRequests={setRequests}>
 
-                        </RequestsTable>)
+                        </RequestsTable>)) : (<p className='text-red-500 font-semibold'>
+                        Requests are not added</p>)
                     }
             </section>
             </div>
