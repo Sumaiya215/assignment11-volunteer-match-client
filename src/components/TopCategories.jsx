@@ -9,7 +9,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 const TopCategories = () => {
    const axiosPublic = useAxiosPublic();
    const [posts, setPosts] = useState([]);
-   const {loading} = useContext(AuthContext);
+//    const {loading} = useContext(AuthContext);
 
     useEffect(() => {
         fetchAllPosts();
@@ -22,9 +22,9 @@ const TopCategories = () => {
 
     console.log(posts);
 
-    if(loading) return 
-    <progress className="progress progress-success w-56 " value="40" max="100">
-    </progress>
+    // if(loading) return 
+    // <progress className="progress progress-success w-56 " value="40" max="100">
+    // </progress>
 
     return (
         <Tabs>
