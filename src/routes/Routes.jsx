@@ -14,8 +14,6 @@ import PostDetails from "../pages/PostDetails";
 import RequestPost from "../pages/RequestPost";
 import UpdatePost from "../pages/UpdatePost";
 
-
-
 const router = createBrowserRouter([
     {
       path: "/",

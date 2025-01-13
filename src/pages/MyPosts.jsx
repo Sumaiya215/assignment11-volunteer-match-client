@@ -20,9 +20,8 @@ const MyPosts = () => {
         fetchAllPosts();
     }, [user?.email])
 
-    console.log(posts);
+    // console.log(posts);
 
-    // for post requests
     
     useEffect(() => {
         const fetchAllRequests = async () => {
@@ -32,7 +31,7 @@ const MyPosts = () => {
         fetchAllRequests();
     }, [user?.email])
 
-    console.log(requests);
+    // console.log(requests);
 
     if(loading) return 
     <progress className="progress progress-success w-56 " value="40" max="100">

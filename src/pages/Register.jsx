@@ -22,7 +22,7 @@ const Register = () => {
         console.log(name, photo, email, password);
 
         setErrorMessage('');
-        // loading(true);
+       
 
         const regex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
         if (!regex.test(password)) {

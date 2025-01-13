@@ -1,5 +1,4 @@
 
-// import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
@@ -29,7 +28,7 @@ const PostsTable = ({ post, index , posts, setPosts}) => {
                                     icon: "success"
                               });
     
-                                // updating state
+                                
                                 const newPosts = posts.filter(post => post._id !== _id);
                                 setPosts(newPosts);
     

@@ -7,7 +7,7 @@ const RequestsTable = ({ request, index, requests, setRequests }) => {
     const { _id, title, userEmail, status } = request || '';
 
     const handleDelete = id => {
-        // console.log(id);
+        
 
         Swal.fire({
             title: "Are you sure?",
@@ -27,7 +27,7 @@ const RequestsTable = ({ request, index, requests, setRequests }) => {
                         icon: "success"
                     });
 
-                    // updating state
+                  
                     const newRequests = requests.filter(request => request._id !== _id);
                     setRequests(newRequests);
                 }
