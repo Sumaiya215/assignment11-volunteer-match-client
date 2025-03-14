@@ -19,7 +19,7 @@ const PostCard = ({ post }) => {
                     <p className="font-semibold">Deadline: {format(new Date(deadline), 'P')}</p>
                     <div className="card-actions mt-4">
                         <Link to={`/post/${_id}`}>
-                            <button className="btn btn-primary">View Details</button>
+                            <button className="btn btn-primary font-bold">View Details</button>
                         </Link>
                     </div>
                 </div>

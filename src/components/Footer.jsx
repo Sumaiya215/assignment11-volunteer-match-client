@@ -2,7 +2,7 @@ import logo from '../assets/v3-logo.jpg'
 
 const Footer = () => {
     return (
-        <div className='max-w-7xl mx-auto  mb-10'>
+        <div className='max-w-full mx-auto  mb-10'>
             <footer className="footer bg-neutral text-neutral-content p-10">
                 <aside>
                     <img src={logo} className='w-12 rounded-full' alt="" />
