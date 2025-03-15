@@ -45,15 +45,15 @@ const Login = () => {
 
 
     return (
-        <div className="hero bg-base-100 min-h-screen mx">
+        <div className="hero bg-base-100 min-h-screen  mb-12">
             <Helmet>
                 <title>Login | Volunteer Match</title>
             </Helmet>
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left w-[640px]">
+            <div className="hero-content flex-col lg:flex-row-reverse justify-center items-center gap-8">
+                <div className="text-center  lg:text-left w-[640px]">
                     <Lottie animationData={loginLottieData}></Lottie>
                 </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                <div className="card bg-base-100 w-full max-w-[400px] shadow-2xl">
                 <h3 className="text-3xl font-bold text-center mt-4">Login now!</h3>
                     <form onSubmit={handleLogin} className="card-body">
                         <div className="form-control">

@@ -42,6 +42,7 @@ const MyPosts = () => {
             <Helmet>
                 <title>Manage My Posts | Volunteer Match </title>
             </Helmet>
+            <div className='min-h-28'>
             <div className='flex justify-around flex-col lg:flex-row items-center'>
             <section className='mb-12'>
                 <h3 className='text-xl font-bold text-center mb-6'>
@@ -67,6 +68,7 @@ const MyPosts = () => {
                         Requests are not added</p>)
                     }
             </section>
+            </div>
             </div>
         </div>
     );

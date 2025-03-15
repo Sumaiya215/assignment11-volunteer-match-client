@@ -37,6 +37,7 @@ const PostDetails = () => {
             <Helmet>
                 <title>{title}</title>
             </Helmet>
+            <div className='min-h-28'>
             <div className="card flew-col lg:card-side bg-base-100 shadow-xl">
                 <figure>
                     <img
@@ -61,6 +62,7 @@ const PostDetails = () => {
                         </Link>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );
